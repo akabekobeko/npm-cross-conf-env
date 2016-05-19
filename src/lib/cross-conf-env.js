@@ -57,7 +57,7 @@ export default class CrossConfEnv {
    * @return {Array.<String>} Keys.
    */
   _filterKeys( isReplaceOnlyConf ) {
-    const targetPrefix = isReplaceOnlyConf ? 'npm_package_conf' : 'npm_package_';
+    const targetPrefix = isReplaceOnlyConf ? 'npm_package_config_' : 'npm_package_';
     return Object.keys( process.env ).filter( ( key ) => {
       return ( key && typeof key === 'string' && key.indexOf( targetPrefix ) !== -1 );
     } );
