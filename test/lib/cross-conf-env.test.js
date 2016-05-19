@@ -65,7 +65,7 @@ describe( 'CrossConfEnv', () => {
       assert.deepEqual( cce.argv, [ 'test', 'param=' + APP_LANG + ',var2', 'param=' + process.env.npm_package_name + ',var2' ] );
     } );
 
-    it( 'npm_package_conf_..., replace "var", "$var", "%var%"', () => {
+    it( 'npm_package_config_..., replace "var", "$var", "%var%"', () => {
       let cce  = new CrossConfEnv( [ 'test', 'npm_package_config_app' ], true );
       assert.deepEqual( cce.argv, [ 'test', APP_NAME ] );
 
@@ -85,7 +85,7 @@ describe( 'CrossConfEnv', () => {
       assert.deepEqual( cce.argv, [ 'test', APP_LANG ] );
     } );
 
-    it( 'npm_package_conf_..., replace "param=var,var2", "param=$var,var2", "param=%var%,var2"', () => {
+    it( 'npm_package_config_..., replace "param=var,var2", "param=$var,var2", "param=%var%,var2"', () => {
       let cce  = new CrossConfEnv( [ 'test', 'param=npm_package_config_app,var2', 'param=npm_package_version,var2' ], true );
       assert.deepEqual( cce.argv, [ 'test', 'param=' + APP_NAME + ',var2', 'param=npm_package_version,var2' ] );
 
