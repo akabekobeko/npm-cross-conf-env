@@ -1,0 +1,22 @@
+{
+  "name": "examples-cross-conf-env",
+  "description": "Examples for the cross-conf-env.",
+  "private": true,
+  "version": "1.0.0",
+  "author": "akabeko (http://akabeko.me/)",
+  "license": "MIT",
+  "main": "index.js",
+  "conf": {
+    "var": "MyApp"
+  },
+  "scripts": {
+    "start": "cross-conf-env echo keep npm_package_conf_var $npm_package_conf_var %npm_package_conf_var% npm_package_version $npm_package_version %npm_package_version%",
+    "task1": "cross-conf-env echo keep npm_package_conf_var",
+    "task2": "cross-conf-env echo $npm_package_version",
+    "task": "npm-run-all task1 task2"
+  },
+  "dependencies": {
+    "cross-conf-env": "^1.0.0",
+    "npm-run-all": "^2.1.0"
+  }
+}
