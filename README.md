@@ -1,7 +1,7 @@
 # npm-cross-conf-env
 
 [![npm version](https://badge.fury.io/js/cross-conf-env.svg)](https://badge.fury.io/js/cross-conf-env)
-[![Build Status](https://travis-ci.org/akabekobeko/cross-conf-env.svg?branch=master)](https://travis-ci.org/akabekobeko/npm-cross-conf-env)
+[![Build Status](https://travis-ci.org/akabekobeko/npm-cross-conf-env.svg?branch=master)](https://travis-ci.org/akabekobeko/npm-cross-conf-env)
 [![Document](https://doc.esdoc.org/github.com/akabekobeko/npm-cross-conf-env/badge.svg?t=0)](https://doc.esdoc.org/github.com/akabekobeko/npm-cross-conf-env)
 
 To cross-platform the `conf` and `root` variable reference of package.json in npm-scripts.
