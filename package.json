@@ -1,0 +1,58 @@
+{
+  "name": "cross-conf-env",
+  "description": "To cross-platform the conf variable reference of package.json in npm-scripts.",
+  "version": "1.0.0",
+  "author": "akabeko",
+  "license": "MIT",
+  "homepage": "https://github.com/akabekobeko/npm-cross-conf-env#readme",
+  "main": "index.js",
+  "bin": "bin/main.js",
+  "files": [
+    "bin",
+    "lib",
+    "index.js"
+  ],
+  "keywords": [
+    "npm-scripts",
+    "npm_package_config"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/akabekobeko/npm-cross-conf-env.git"
+  },
+  "bugs": {
+    "url": "https://github.com/akabekobeko/npm-cross-conf-env/issues"
+  },
+  "babel": {
+    "presets": [
+      "es2015"
+    ],
+    "env": {
+      "development": {
+        "presets": [
+          "power-assert"
+        ]
+      }
+    }
+  },
+  "scripts": {
+    "test": "mocha --timeout 50000 --compilers js:babel-register test/**/*.test.js",
+    "start": "npm run watch",
+    "esdoc": "esdoc -c esdoc.json",
+    "build": "babel src --out-dir ./",
+    "watch": "babel src --out-dir ./ --watch",
+    "prepublish": "npm run build"
+  },
+  "devDependencies": {
+    "babel-cli": "^6.9.0",
+    "babel-preset-es2015": "^6.9.0",
+    "babel-preset-power-assert": "^1.0.0",
+    "babel-register": "^6.9.0",
+    "esdoc": "^0.4.7",
+    "mocha": "^2.4.5",
+    "power-assert": "^1.4.1"
+  },
+  "dependencies": {
+    "cross-spawn": "^3.0.1"
+  }
+}
