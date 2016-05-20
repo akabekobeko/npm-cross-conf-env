@@ -4,7 +4,7 @@
 [![Build Status](https://travis-ci.org/akabekobeko/npm-cross-conf-env.svg?branch=master)](https://travis-ci.org/akabekobeko/npm-cross-conf-env)
 [![Document](https://doc.esdoc.org/github.com/akabekobeko/npm-cross-conf-env/badge.svg?t=0)](https://doc.esdoc.org/github.com/akabekobeko/npm-cross-conf-env)
 
-To cross-platform the `conf` and `root` variable reference of package.json in npm-scripts.
+To cross-platform the `config` and `root` variable reference of package.json in npm-scripts.
 
 ## Installation
 
@@ -14,19 +14,19 @@ $ npm install cross-conf-env
 
 ## Usage
 
-To the `conf` of package.json to set the value.
+To the `config` of package.json to set the value.
 
 ```js
 {
   "name": "sample",
   "version": "1.0.0",
-  "conf": {
+  "config": {
     "app": "MyApp"
   },
   "scripts": {
-    "var": "cross-conf-env echo npm_package_conf_app npm_package_version",
-    "var:bash": "cross-conf-env echo $npm_package_conf_app $npm_package_version",
-    "var:win": "cross-conf-env echo %npm_package_conf_app% %npm_package_version%"
+    "var": "cross-conf-env echo npm_package_config_app npm_package_version",
+    "var:bash": "cross-conf-env echo $npm_package_config_app $npm_package_version",
+    "var:win": "cross-conf-env echo %npm_package_config_app% %npm_package_version%"
   },
   "dependencies": {
     "cross-conf-env": "^1.0.0"
@@ -34,7 +34,7 @@ To the `conf` of package.json to set the value.
 }
 ```
 
-Value of `npm_package_conf_...` or `npm_package_...` will be executed after being replaced.
+Value of `npm_package_config_` or `npm_package_` will be executed after being replaced.
 
 ```
 $ npm run var
@@ -56,9 +56,9 @@ It supports all of the format by using this npm in npm-scripts, format that supp
 
 | Platform | Format |
 |:--|:--|
-| **OS X**, **Linux** ( bash ) | `$npm_package` or `$npm_package_conf` |
-| **Windows** ( cmd.exe or PowerShell ) | `%npm_package%` or `%npm_package_conf%` |
-| `cross-conf-env` original | `npm_package` or `npm_package_conf` |
+| **OS X**, **Linux** ( bash ) | `$npm_package_` or `$npm_package_config_` |
+| **Windows** ( cmd.exe or PowerShell ) | `%npm_package_%` or `%npm_package_config_%` |
+| `cross-conf-env` original | `npm_package_` or `npm_package_config_` |
 
 npm-scripts environment variable that has been expanded by the execution platform is used as it is. Otherwise, to expand the `cross-conf-env`.
 

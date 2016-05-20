@@ -6,17 +6,17 @@
   "author": "akabeko (http://akabeko.me/)",
   "license": "MIT",
   "main": "index.js",
-  "conf": {
+  "config": {
     "var": "MyApp"
   },
   "scripts": {
-    "start": "cross-conf-env echo keep npm_package_conf_var $npm_package_conf_var %npm_package_conf_var% npm_package_version $npm_package_version %npm_package_version%",
-    "task1": "cross-conf-env echo keep npm_package_conf_var",
+    "start": "cross-conf-env echo keep npm_package_config_var $npm_package_config_var %npm_package_config_var% npm_package_version $npm_package_version %npm_package_version%",
+    "task1": "cross-conf-env echo keep npm_package_config_var",
     "task2": "cross-conf-env echo $npm_package_version",
     "task": "npm-run-all task1 task2"
   },
   "dependencies": {
-    "cross-conf-env": "^1.0.0",
+    "cross-conf-env": "^1.0.2",
     "npm-run-all": "^2.1.0"
   }
 }
