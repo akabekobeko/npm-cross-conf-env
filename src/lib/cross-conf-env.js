@@ -9,7 +9,7 @@ export default class CrossConfEnv {
    * Initialize instance.
    *
    * @param {Array.<Object>} argv              Arguments of the command line.
-   * @param {Boolean}        isReplaceOnlyConf Only to select "npm_package_conf...", To specify the "true".
+   * @param {Boolean}        isReplaceOnlyConf Only to select "npm_package_config_", To specify the "true".
    */
   constructor( argv = [], isReplaceOnlyConf = false ) {
     this._keys = this._filterKeys( isReplaceOnlyConf );
@@ -52,7 +52,7 @@ export default class CrossConfEnv {
   /**
    * Select the key of the value to be replaced from "process.env".
    *
-   * @param {Boolean} isReplaceOnlyConf Only to select "npm_package_conf...", To specify the "true".
+   * @param {Boolean} isReplaceOnlyConf Only to select "npm_package_config_", To specify the "true".
    *
    * @return {Array.<String>} Keys.
    */
