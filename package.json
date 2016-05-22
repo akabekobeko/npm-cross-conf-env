@@ -1,7 +1,7 @@
 {
   "name": "cross-conf-env",
-  "description": "To cross-platform the conf variable reference of package.json in npm-scripts.",
-  "version": "1.0.2",
+  "description": "To cross-platform the config & root variable reference of package.json in npm-scripts.",
+  "version": "1.0.3",
   "author": "akabeko",
   "license": "MIT",
   "homepage": "https://github.com/akabekobeko/npm-cross-conf-env#readme",
@@ -14,7 +14,9 @@
   ],
   "keywords": [
     "npm-scripts",
-    "npm_package_config"
+    "npm_package_config",
+    "package.json",
+    "variable"
   ],
   "repository": {
     "type": "git",
