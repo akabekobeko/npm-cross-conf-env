@@ -15,8 +15,8 @@
     "task2": "cross-conf-env echo $npm_package_version",
     "task": "npm-run-all task1 task2"
   },
-  "dependencies": {
-    "cross-conf-env": "^1.0.2",
+  "devDependencies": {
+    "cross-conf-env": "^1.0.3",
     "npm-run-all": "^2.1.0"
   }
 }

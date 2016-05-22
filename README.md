@@ -8,8 +8,10 @@ To cross-platform the `config` and `root` variable reference of package.json in 
 
 ## Installation
 
+This npm is installed on npm-scripts only a so `devDependencies`.
+
 ```
-$ npm install cross-conf-env
+$ npm install --save--dev cross-conf-env
 ```
 
 ## Usage
@@ -28,7 +30,7 @@ To the `config` of package.json to set the value.
     "var:bash": "cross-conf-env echo $npm_package_config_app $npm_package_version",
     "var:win": "cross-conf-env echo %npm_package_config_app% %npm_package_version%"
   },
-  "dependencies": {
+  "devDependencies": {
     "cross-conf-env": "^1.0.0"
   }
 }
