@@ -75,15 +75,12 @@ export default class CrossConfEnv {
 
     return argv.map( ( arg ) => {
       let newArg = arg;
-      this._keys.some( ( key ) => {
+      this._keys.forEach( ( key ) => {
         const pettern = '%' + key + '%|\\$' + key + '|' + key;
         const regexp  = new RegExp( pettern );
-        if( regexp.test( arg ) ) {
-          newArg = arg.replace( regexp, String( process.env[ key ] ) );
-          return true;
+        if( regexp.test( newArg ) ) {
+          newArg = newArg.replace( regexp, String( process.env[ key ] ) );
         }
-
-        return false;
       } );
 
       return newArg;

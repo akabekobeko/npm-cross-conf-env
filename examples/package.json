@@ -11,12 +11,13 @@
   },
   "scripts": {
     "start": "cross-conf-env echo keep npm_package_config_var $npm_package_config_var %npm_package_config_var% npm_package_version $npm_package_version %npm_package_version%",
-    "task1": "cross-conf-env echo keep npm_package_config_var",
-    "task2": "cross-conf-env echo $npm_package_version",
-    "task": "npm-run-all task1 task2"
+    "task:a1": "cross-conf-env echo keep npm_package_config_var",
+    "task:a2": "cross-conf-env echo $npm_package_version",
+    "task:a": "npm-run-all task:a1 task:a2".
+    "task:b": "cross-conf-env echo npm_package_config_var-npm_package_version"
   },
   "devDependencies": {
-    "cross-conf-env": "^1.0.3",
+    "cross-conf-env": "^1.0.4",
     "npm-run-all": "^2.1.0"
   }
 }

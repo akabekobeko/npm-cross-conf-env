@@ -28,10 +28,12 @@ To the `config` of package.json to set the value.
   "scripts": {
     "var": "cross-conf-env echo npm_package_config_app npm_package_version",
     "var:bash": "cross-conf-env echo $npm_package_config_app $npm_package_version",
-    "var:win": "cross-conf-env echo %npm_package_config_app% %npm_package_version%"
+    "var:win": "cross-conf-env echo %npm_package_config_app% %npm_package_version%",
+    "var:cross": "cross-conf-env echo npm_package_config app-npm_package_version",
+    "var:cross-multiple": "cross-conf-env echo npm_package_config_app-npm_package_version"
   },
   "devDependencies": {
-    "cross-conf-env": "^1.0.0"
+    "cross-conf-env": "^1.0.4"
   }
 }
 ```
@@ -50,6 +52,14 @@ MyApp 1.0.0
 $ npm run var:win
 
 MyApp 1.0.0
+
+$ npm run var:cross
+
+MyApp 1.0.0
+
+$ npm run var:cross-multiple
+
+MyApp-1.0.0
 ```
 
 The format of the environment variable in npm-scripts are different for each platform. **OS X** or **Linux** ( bash ) is `$variable`, **Windows** ( cmd.exe or PowerShell ) is `%variable%`.
@@ -60,7 +70,7 @@ It supports all of the format by using this npm in npm-scripts, format that supp
 |:--|:--|
 | **OS X**, **Linux** ( bash ) | `$npm_package_` or `$npm_package_config_` |
 | **Windows** ( cmd.exe or PowerShell ) | `%npm_package_%` or `%npm_package_config_%` |
-| `cross-conf-env` original | `npm_package_` or `npm_package_config_` |
+| `cross-conf-env` original | `npm_package_` or `npm_package_config_`, without special charactors ( `$` or `%` ) |
 
 npm-scripts environment variable that has been expanded by the execution platform is used as it is. Otherwise, to expand the `cross-conf-env`.
 

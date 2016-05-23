@@ -19,11 +19,19 @@ keep MyApp MyApp MyApp 1.0.0 1.0.0 1.0.0
 With [npm-run-all](https://www.npmjs.com/package/npm-run-all):
 
 ```
-$ npm run task
+$ npm run task:a
 
 keep MyApp
 
 1.0.0
+```
+
+Multiple variables in an one paramter:
+
+```
+$ npm run task:b
+
+MyApp-1.0.0
 ```
 
 ## License
