@@ -1,5 +1,10 @@
 # ChangeLog
 
+## 1.0.5
+
+* Fix
+  * [Can't correctly identify the prefix](https://github.com/akabekobeko/npm-cross-conf-env/issues/10)
+
 ## 1.0.4
 
 * Change

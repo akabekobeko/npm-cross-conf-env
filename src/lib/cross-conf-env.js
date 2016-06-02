@@ -58,8 +58,17 @@ export default class CrossConfEnv {
    */
   _filterKeys( isReplaceOnlyConf ) {
     const targetPrefix = isReplaceOnlyConf ? 'npm_package_config_' : 'npm_package_';
-    return Object.keys( process.env ).filter( ( key ) => {
+    return Object
+    .keys( process.env )
+    .filter( ( key ) => {
       return ( key && typeof key === 'string' && key.indexOf( targetPrefix ) !== -1 );
+    } )
+    .sort( ( a, b ) => {
+      // Processing the variables with the same prefix in the correct order.
+      // "npm_package_config_NAME_NAME2" contained in "npm_package_config_NAME"
+      // is in descending order by the length to prevent from being replace earlier.
+      //
+      return ( b.length - a.length );
     } );
   }
 
