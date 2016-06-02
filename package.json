@@ -1,6 +1,6 @@
 {
   "name": "cross-conf-env",
-  "description": "To cross-platform the config & root variable reference of package.json in npm-scripts.",
+  "description": "To cross-platform the config and root variable reference of package.json in npm-scripts.",
   "version": "1.0.5",
   "author": "akabeko",
   "license": "MIT",
