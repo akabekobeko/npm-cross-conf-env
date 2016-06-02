@@ -17,7 +17,7 @@
     "task:b": "cross-conf-env echo npm_package_config_var-npm_package_version"
   },
   "devDependencies": {
-    "cross-conf-env": "^1.0.4",
+    "cross-conf-env": "^1.0.5",
     "npm-run-all": "^2.1.0"
   }
 }
