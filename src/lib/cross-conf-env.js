@@ -27,7 +27,7 @@ export function FilterKeys() {
  * Replace the arguments in the value of "process.env".
  *
  * @param {Array.<Object>} argv Arguments of the command line.
- * @param {Array.<Object>} argv The filtered key ( "npm_package_" or "npm_config_" ) of "process.env".
+ * @param {Array.<Object>} keys The filtered key ( "npm_package_" or "npm_config_" ) of "process.env".
  *
  * @return {Array.<String>} Augments.
  */
