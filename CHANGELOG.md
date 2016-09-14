@@ -1,5 +1,12 @@
 # ChangeLog
 
+## 1.0.6
+
+* Change
+  * [Support npm config params](https://github.com/akabekobeko/npm-cross-conf-env/issues/14)
+* Fix
+  * [It is an error to `npm run` the examples](https://github.com/akabekobeko/npm-cross-conf-env/issues/12)
+
 ## 1.0.5
 
 * Fix

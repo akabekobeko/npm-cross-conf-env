@@ -33,7 +33,7 @@ To the `config` of package.json to set the value.
     "var:cross-multiple": "cross-conf-env echo npm_package_config_app-npm_package_version"
   },
   "devDependencies": {
-    "cross-conf-env": "^1.0.4"
+    "cross-conf-env": "^1.0.6"
   }
 }
 ```
