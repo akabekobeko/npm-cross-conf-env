@@ -1,5 +1,11 @@
 # ChangeLog
 
+## 1.0.7
+
+* Change
+  * [Using a Config in a Redirect on Mac &amp; Windows](https://github.com/akabekobeko/npm-cross-conf-env/issues/17)
+  * [Node v7 support](https://github.com/akabekobeko/npm-cross-conf-env/issues/16)
+
 ## 1.0.6
 
 * Change

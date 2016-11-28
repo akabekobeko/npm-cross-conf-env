@@ -1,7 +1,7 @@
 {
   "name": "cross-conf-env",
   "description": "To cross-platform the config and root variable reference of package.json in npm-scripts.",
-  "version": "1.0.6",
+  "version": "1.0.7",
   "author": "akabeko",
   "license": "MIT",
   "homepage": "https://github.com/akabekobeko/npm-cross-conf-env#readme",
@@ -46,15 +46,15 @@
     "prepublish": "npm run build"
   },
   "devDependencies": {
-    "babel-cli": "^6.14.0",
-    "babel-preset-latest": "^6.14.0",
+    "babel-cli": "^6.18.0",
+    "babel-preset-latest": "^6.16.0",
     "babel-preset-power-assert": "^1.0.0",
-    "babel-register": "^6.14.0",
+    "babel-register": "^6.18.0",
     "esdoc": "^0.4.8",
-    "mocha": "^3.0.2",
-    "power-assert": "^1.4.1"
+    "mocha": "^3.2.0",
+    "power-assert": "^1.4.2"
   },
   "dependencies": {
-    "cross-spawn": "^4.0.0"
+    "cross-spawn": "^5.0.1"
   }
 }
