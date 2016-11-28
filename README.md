@@ -80,6 +80,35 @@ Definition of npm-scripts:
 cross-conf-env command param1 param2 ...etc
 ```
 
+# Limitations
+
+`cross-conf-env` converts the value specified in `process.env`.
+It will not work if run from pipe in npm-scripts.
+
+```json
+{
+  "config": {
+    "app": "MyApp",
+    "test": "Test"
+  },
+  "scripts": {
+    "pipe": "cross-conf-env echo npm_package_config_var | cross-conf-env echo keep npm_package_config_test",
+  }
+}
+```
+
+results:
+
+```
+$ npm run pipe
+
+Test
+echo: write: Broken pipe
+```
+
+If concatenating npm-scripts we recommend [npm-run-all](https://www.npmjs.com/package/npm-run-all) rather than pipe.
+If it is `npm-run-all` can concatenate npm-scripts to cross platforms, and `cross-conf-env` will work as well.
+
 # ChangeLog
 
 * [CHANGELOG](CHANGELOG.md)
