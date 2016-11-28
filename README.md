@@ -1,5 +1,6 @@
 # npm-cross-conf-env
 
+![node v6, v7](https://img.shields.io/badge/node-v6%2C%20v7-green.svg)
 [![npm version](https://badge.fury.io/js/cross-conf-env.svg)](https://badge.fury.io/js/cross-conf-env)
 [![Build Status](https://travis-ci.org/akabekobeko/npm-cross-conf-env.svg?branch=master)](https://travis-ci.org/akabekobeko/npm-cross-conf-env)
 [![Document](https://doc.esdoc.org/github.com/akabekobeko/npm-cross-conf-env/badge.svg?t=0)](https://doc.esdoc.org/github.com/akabekobeko/npm-cross-conf-env)
@@ -79,6 +80,35 @@ Definition of npm-scripts:
 ```
 cross-conf-env command param1 param2 ...etc
 ```
+
+# Limitations
+
+`cross-conf-env` converts the value specified in `process.env`.
+It will not work if run from pipe in npm-scripts.
+
+```json
+{
+  "config": {
+    "app": "MyApp",
+    "test": "Test"
+  },
+  "scripts": {
+    "pipe": "cross-conf-env echo npm_package_config_var | cross-conf-env echo keep npm_package_config_test",
+  }
+}
+```
+
+results:
+
+```
+$ npm run pipe
+
+Test
+echo: write: Broken pipe
+```
+
+If concatenating npm-scripts we recommend [npm-run-all](https://www.npmjs.com/package/npm-run-all) rather than pipe.
+If it is `npm-run-all` can concatenate npm-scripts to cross platforms, and `cross-conf-env` will work as well.
 
 # ChangeLog
 
