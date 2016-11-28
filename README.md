@@ -1,5 +1,6 @@
 # npm-cross-conf-env
 
+![node v6, v7](https://img.shields.io/badge/node-v6%2C%20v7-green.svg)
 [![npm version](https://badge.fury.io/js/cross-conf-env.svg)](https://badge.fury.io/js/cross-conf-env)
 [![Build Status](https://travis-ci.org/akabekobeko/npm-cross-conf-env.svg?branch=master)](https://travis-ci.org/akabekobeko/npm-cross-conf-env)
 [![Document](https://doc.esdoc.org/github.com/akabekobeko/npm-cross-conf-env/badge.svg?t=0)](https://doc.esdoc.org/github.com/akabekobeko/npm-cross-conf-env)
