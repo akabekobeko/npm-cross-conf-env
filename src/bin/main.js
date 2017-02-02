@@ -1,5 +1,5 @@
 #!/usr/bin/env node
 
-import CrossConfEnv from '../lib/main.js';
+const CrossConfEnv = require( '../lib/main.js' );
 
-CrossConfEnv( process.argv.slice( 2 ) );
+CrossConfEnv.execute( process.argv.slice( 2 ) );
