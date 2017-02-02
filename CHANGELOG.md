@@ -1,5 +1,10 @@
 # ChangeLog
 
+## 1.1.1
+
+* Fix
+  * Package.json's file properties specification is incorrect [#21](https://github.com/akabekobeko/npm-cross-conf-env/issues/21)
+
 ## 1.1.0
 
 * Change
