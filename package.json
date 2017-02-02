@@ -1,12 +1,15 @@
 {
   "name": "cross-conf-env",
   "description": "To cross-platform the config and root variable reference of package.json in npm-scripts.",
-  "version": "1.0.7",
+  "version": "1.1.0",
   "author": "akabeko",
   "license": "MIT",
   "homepage": "https://github.com/akabekobeko/npm-cross-conf-env#readme",
+  "engines": {
+    "node": ">= 6"
+  },
   "main": "index.js",
-  "bin": "bin/main.js",
+  "bin": "src/bin/main.js",
   "files": [
     "bin",
     "lib",
@@ -25,10 +28,20 @@
   "bugs": {
     "url": "https://github.com/akabekobeko/npm-cross-conf-env/issues"
   },
+  "esdoc": {
+    "source": "./src",
+    "destination": "./esdoc",
+    "test": {
+      "type": "mocha",
+      "source": "./test"
+    },
+    "plugins": [
+      {
+        "name": "esdoc-node"
+      }
+    ]
+  },
   "babel": {
-    "presets": [
-      "latest"
-    ],
     "env": {
       "development": {
         "presets": [
@@ -39,18 +52,13 @@
   },
   "scripts": {
     "test": "mocha --timeout 50000 --compilers js:babel-register test/**/*.test.js",
-    "start": "npm run watch",
-    "esdoc": "esdoc -c esdoc.json",
-    "build": "babel src --out-dir ./",
-    "watch": "babel src --out-dir ./ --watch",
-    "prepublish": "npm run build"
+    "esdoc": "esdoc"
   },
   "devDependencies": {
-    "babel-cli": "^6.18.0",
-    "babel-preset-latest": "^6.16.0",
     "babel-preset-power-assert": "^1.0.0",
-    "babel-register": "^6.18.0",
-    "esdoc": "^0.4.8",
+    "babel-register": "^6.22.0",
+    "esdoc": "^0.5.2",
+    "esdoc-node": "^1.0.0",
     "mocha": "^3.2.0",
     "power-assert": "^1.4.2"
   },

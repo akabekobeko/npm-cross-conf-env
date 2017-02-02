@@ -2,7 +2,7 @@
   "name": "examples-cross-conf-env",
   "description": "Examples for the cross-conf-env.",
   "private": true,
-  "version": "1.0.0",
+  "version": "1.1.0",
   "author": "akabeko (http://akabeko.me/)",
   "license": "MIT",
   "main": "index.js",
@@ -19,7 +19,7 @@
     "task:c-all": "npm run task:c --foo=Foo --bar=Bar --baz=Baz"
   },
   "devDependencies": {
-    "cross-conf-env": "^1.0.7",
-    "npm-run-all": "^3.1.1"
+    "cross-conf-env": "^1.1.0",
+    "npm-run-all": "^4.0.1"
   }
 }

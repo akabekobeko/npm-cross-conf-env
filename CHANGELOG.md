@@ -1,5 +1,10 @@
 # ChangeLog
 
+## 1.1.0
+
+* Change
+  * Drop transpile by Babel [#20](https://github.com/akabekobeko/npm-cross-conf-env/issues/20)
+
 ## 1.0.7
 
 * Change

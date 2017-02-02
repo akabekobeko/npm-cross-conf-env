@@ -1,5 +1,5 @@
-import assert from 'assert';
-import { FilterKeys, ReplaceArgv } from '../../src/lib/cross-conf-env.js';
+const assert = require( 'assert' );
+const CrossConfEnv = require( '../../src/lib/cross-conf-env.js' );
 
 /** @test {CrossConfEnv} */
 describe( 'CrossConfEnv', () => {
@@ -19,10 +19,10 @@ describe( 'CrossConfEnv', () => {
     process.env.npm_config_lang             = ENV_APP_LANG;
   } );
 
-  /** @test {FilterKeys} */
-  describe( 'FilterKeys', () => {
+  /** @test {CrossConfEnv#filterKeys} */
+  describe( 'filterKeys', () => {
     it( 'keys', () => {
-      const keys      = FilterKeys();
+      const keys      = CrossConfEnv.filterKeys();
       let   succeeded = keys.some( ( key ) => key === 'npm_package_config_app' );
       assert( succeeded === true );
 
@@ -31,29 +31,29 @@ describe( 'CrossConfEnv', () => {
     } );
   } );
 
-  /** @test {ReplaceArgv} */
-  describe( 'ReplaceArgv', () => {
+  /** @test {CrossConfEnv#replaceArgv} */
+  describe( 'replaceArgv', () => {
     it( '"var", "$var", "%var%"', () => {
       const expected1 = [ 'test', ENV_APP_NAME, process.env.npm_package_version ];
       const expected2 = [ 'test', ENV_APP_LANG, process.env.npm_package_name ];
 
-      const keys = FilterKeys();
-      let   argv = ReplaceArgv( [ 'test', 'npm_package_config_app', 'npm_package_version' ], keys );
+      const keys = CrossConfEnv.filterKeys();
+      let   argv = CrossConfEnv.replaceArgv( [ 'test', 'npm_package_config_app', 'npm_package_version' ], keys );
       assert.deepEqual( argv, expected1 );
 
-      argv = ReplaceArgv( [ 'test', 'npm_package_config_lang', 'npm_package_name' ], keys );
+      argv = CrossConfEnv.replaceArgv( [ 'test', 'npm_package_config_lang', 'npm_package_name' ], keys );
       assert.deepEqual( argv, expected2 );
 
-      argv = ReplaceArgv( [ 'test', '$npm_package_config_app', '$npm_package_version' ], keys );
+      argv = CrossConfEnv.replaceArgv( [ 'test', '$npm_package_config_app', '$npm_package_version' ], keys );
       assert.deepEqual( argv, expected1 );
 
-      argv = ReplaceArgv( [ 'test', '$npm_package_config_lang', '$npm_package_name' ], keys );
+      argv = CrossConfEnv.replaceArgv( [ 'test', '$npm_package_config_lang', '$npm_package_name' ], keys );
       assert.deepEqual( argv, expected2 );
 
-      argv = ReplaceArgv( [ 'test', '%npm_package_config_app%', '%npm_package_version%' ], keys );
+      argv = CrossConfEnv.replaceArgv( [ 'test', '%npm_package_config_app%', '%npm_package_version%' ], keys );
       assert.deepEqual( argv, expected1 );
 
-      argv = ReplaceArgv( [ 'test', '%npm_package_config_lang%', '%npm_package_name%' ], keys );
+      argv = CrossConfEnv.replaceArgv( [ 'test', '%npm_package_config_lang%', '%npm_package_name%' ], keys );
       assert.deepEqual( argv, expected2 );
     } );
 
@@ -61,44 +61,44 @@ describe( 'CrossConfEnv', () => {
       const expected1 = [ 'test', 'param=' + ENV_APP_NAME + ',other', 'param=' + process.env.npm_package_version + ',other' ];
       const expected2 = [ 'test', 'param=' + ENV_APP_LANG + ',other', 'param=' + process.env.npm_package_name + ',other' ];
 
-      const keys = FilterKeys();
-      let   argv = ReplaceArgv( [ 'test', 'param=npm_package_config_app,other', 'param=npm_package_version,other' ], keys );
+      const keys = CrossConfEnv.filterKeys();
+      let   argv = CrossConfEnv.replaceArgv( [ 'test', 'param=npm_package_config_app,other', 'param=npm_package_version,other' ], keys );
       assert.deepEqual( argv, expected1 );
 
-      argv = ReplaceArgv( [ 'test', 'param=npm_package_config_lang,other', 'param=npm_package_name,other' ], keys );
+      argv = CrossConfEnv.replaceArgv( [ 'test', 'param=npm_package_config_lang,other', 'param=npm_package_name,other' ], keys );
       assert.deepEqual( argv, expected2 );
 
-      argv = ReplaceArgv( [ 'test', 'param=$npm_package_config_app,other', 'param=$npm_package_version,other' ], keys );
+      argv = CrossConfEnv.replaceArgv( [ 'test', 'param=$npm_package_config_app,other', 'param=$npm_package_version,other' ], keys );
       assert.deepEqual( argv, expected1 );
 
-      argv = ReplaceArgv( [ 'test', 'param=$npm_package_config_lang,other', 'param=$npm_package_name,other' ], keys );
+      argv = CrossConfEnv.replaceArgv( [ 'test', 'param=$npm_package_config_lang,other', 'param=$npm_package_name,other' ], keys );
       assert.deepEqual( argv, expected2 );
 
-      argv = ReplaceArgv( [ 'test', 'param=%npm_package_config_app%,other', 'param=%npm_package_version%,other' ], keys );
+      argv = CrossConfEnv.replaceArgv( [ 'test', 'param=%npm_package_config_app%,other', 'param=%npm_package_version%,other' ], keys );
       assert.deepEqual( argv, expected1 );
 
-      argv = ReplaceArgv( [ 'test', 'param=%npm_package_config_lang%,other', 'param=%npm_package_name%,other' ], keys );
+      argv = CrossConfEnv.replaceArgv( [ 'test', 'param=%npm_package_config_lang%,other', 'param=%npm_package_name%,other' ], keys );
       assert.deepEqual( argv, expected2 );
     } );
 
     it( 'Overlapping prefix', () => {
       const expected = [ ENV_APP_NAME, ENV_APP_MODE, ENV_APP_MODE ];
 
-      const keys = FilterKeys();
-      let   argv = ReplaceArgv( [ 'npm_package_config_app', 'npm_package_config_app_mode', 'npm_package_config_appMode' ], keys );
+      const keys = CrossConfEnv.filterKeys();
+      let   argv = CrossConfEnv.replaceArgv( [ 'npm_package_config_app', 'npm_package_config_app_mode', 'npm_package_config_appMode' ], keys );
       assert.deepEqual( argv, expected );
 
-      argv = ReplaceArgv( [ '$npm_package_config_app', '$npm_package_config_app_mode', '$npm_package_config_appMode' ], keys );
+      argv = CrossConfEnv.replaceArgv( [ '$npm_package_config_app', '$npm_package_config_app_mode', '$npm_package_config_appMode' ], keys );
       assert.deepEqual( argv, expected );
 
-      argv = ReplaceArgv( [ '%npm_package_config_app%', '%npm_package_config_app_mode%', '%npm_package_config_appMode%' ], keys );
+      argv = CrossConfEnv.replaceArgv( [ '%npm_package_config_app%', '%npm_package_config_app_mode%', '%npm_package_config_appMode%' ], keys );
       assert.deepEqual( argv, expected );
     } );
 
     it( 'Maltiple variables in an one paramter: "var1-var2", "$var1-$var2", "%var1%-%var2%"', () => {
       const expected = ENV_APP_NAME + '-' + process.env.npm_package_version;
-      const keys = FilterKeys();
-      const argv = ReplaceArgv( [
+      const keys = CrossConfEnv.filterKeys();
+      const argv = CrossConfEnv.replaceArgv( [
         'npm_package_config_app-npm_package_version',
         '$npm_package_config_app-$npm_package_version',
         '%npm_package_config_app%-%npm_package_version%' ], keys );
@@ -109,23 +109,23 @@ describe( 'CrossConfEnv', () => {
       const expected1 = [ 'test', 'param=' + ENV_APP_NAME + ',other', 'param=' + process.env.npm_package_version + ',other' ];
       const expected2 = [ 'test', 'param=' + ENV_APP_LANG + ',other', 'param=' + process.env.npm_package_name + ',other' ];
 
-      const keys = FilterKeys();
-      let   argv = ReplaceArgv( [ 'test', 'param=npm_config_app,other', 'param=npm_package_version,other' ], keys );
+      const keys = CrossConfEnv.filterKeys();
+      let   argv = CrossConfEnv.replaceArgv( [ 'test', 'param=npm_config_app,other', 'param=npm_package_version,other' ], keys );
       assert.deepEqual( argv, expected1 );
 
-      argv = ReplaceArgv( [ 'test', 'param=npm_config_lang,other', 'param=npm_package_name,other' ], keys );
+      argv = CrossConfEnv.replaceArgv( [ 'test', 'param=npm_config_lang,other', 'param=npm_package_name,other' ], keys );
       assert.deepEqual( argv, expected2 );
 
-      argv = ReplaceArgv( [ 'test', 'param=$npm_config_app,other', 'param=$npm_package_version,other' ], keys );
+      argv = CrossConfEnv.replaceArgv( [ 'test', 'param=$npm_config_app,other', 'param=$npm_package_version,other' ], keys );
       assert.deepEqual( argv, expected1 );
 
-      argv = ReplaceArgv( [ 'test', 'param=$npm_config_lang,other', 'param=$npm_package_name,other' ], keys );
+      argv = CrossConfEnv.replaceArgv( [ 'test', 'param=$npm_config_lang,other', 'param=$npm_package_name,other' ], keys );
       assert.deepEqual( argv, expected2 );
 
-      argv = ReplaceArgv( [ 'test', 'param=%npm_config_app%,other', 'param=%npm_package_version%,other' ], keys );
+      argv = CrossConfEnv.replaceArgv( [ 'test', 'param=%npm_config_app%,other', 'param=%npm_package_version%,other' ], keys );
       assert.deepEqual( argv, expected1 );
 
-      argv = ReplaceArgv( [ 'test', 'param=%npm_config_lang%,other', 'param=%npm_package_name%,other' ], keys );
+      argv = CrossConfEnv.replaceArgv( [ 'test', 'param=%npm_config_lang%,other', 'param=%npm_package_name%,other' ], keys );
       assert.deepEqual( argv, expected2 );
     } );
   } );

@@ -1,2 +1,1 @@
-import CrossConfEnv from './cross-conf-env.js';
-module.exports = CrossConfEnv;
+module.exports = require( './cross-conf-env.js' );
