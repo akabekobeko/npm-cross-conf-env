@@ -1,3 +1,5 @@
+'use strict';
+
 const Spawn = require( 'cross-spawn' );
 
 /**

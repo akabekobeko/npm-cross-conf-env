@@ -1,5 +1,10 @@
 # ChangeLog
 
+# 1.1.2
+
+* Change
+  * Node v4 support [#23](https://github.com/akabekobeko/npm-cross-conf-env/issues/23)
+
 ## 1.1.1
 
 * Fix

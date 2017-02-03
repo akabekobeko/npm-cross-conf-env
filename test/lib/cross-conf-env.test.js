@@ -1,22 +1,21 @@
+'use strict';
+
 const assert = require( 'assert' );
 const CrossConfEnv = require( '../../src/lib/cross-conf-env.js' );
 
 /** @test {CrossConfEnv} */
 describe( 'CrossConfEnv', () => {
-  const ENV_APP_NAME  = 'MyApp';
-  const ENV_APP_MODE  = 'test';
-  const ENV_APP_LANG  = 'en-us';
-
-  // The number that defines the "npm_package_config_NAME" in "beforeEach"
-  const ENV_COUNT = 4;
+  const ENV_APP_NAME = 'MyApp';
+  const ENV_APP_MODE = 'test';
+  const ENV_APP_LANG = 'en-us';
 
   beforeEach( () => {
-    process.env.npm_package_config_app      = ENV_APP_NAME;
-    process.env.npm_package_config_appMode  = ENV_APP_MODE;
-    process.env.npm_package_config_app_mode = ENV_APP_MODE;
-    process.env.npm_package_config_lang     = ENV_APP_LANG;
-    process.env.npm_config_app              = ENV_APP_NAME;
-    process.env.npm_config_lang             = ENV_APP_LANG;
+    process.env[ 'npm_package_config_app' ]      = ENV_APP_NAME;
+    process.env[ 'npm_package_config_appMode' ]  = ENV_APP_MODE;
+    process.env[ 'npm_package_config_app_mode' ] = ENV_APP_MODE;
+    process.env[ 'npm_package_config_lang' ]     = ENV_APP_LANG;
+    process.env[ 'npm_config_app' ]              = ENV_APP_NAME;
+    process.env[ 'npm_config_lang' ]             = ENV_APP_LANG;
   } );
 
   /** @test {CrossConfEnv#filterKeys} */
