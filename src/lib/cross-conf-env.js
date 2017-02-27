@@ -1,6 +1,6 @@
-'use strict';
+'use strict'
 
-const Spawn = require( 'cross-spawn' );
+const Spawn = require('cross-spawn')
 
 /**
  * Replace the value of the command line arguments in process.env,
@@ -12,22 +12,19 @@ class CrossConfEnv {
    *
    * @return {Array.<String>} Keys.
    */
-  static filterKeys() {
+  static filterKeys () {
     return Object
-    .keys( process.env )
-    .filter( ( key ) => {
-      return (
-        key && typeof key === 'string' &&
-        ( key.indexOf( 'npm_package_' ) !== -1 || key.indexOf( 'npm_config_' ) !== -1 )
-      );
-    } )
-    .sort( ( a, b ) => {
+    .keys(process.env)
+    .filter((key) => {
+      return (key && typeof key === 'string' && (key.indexOf('npm_package_') !== -1 || key.indexOf('npm_config_') !== -1))
+    })
+    .sort((a, b) => {
       // Processing the variables with the same prefix in the correct order.
       // "npm_package_config_NAME_NAME2" contained in "npm_package_config_NAME"
       // is in descending order by the length to prevent from being replace earlier.
       //
-      return ( b.length - a.length );
-    } );
+      return (b.length - a.length)
+    })
   }
 
   /**
@@ -38,21 +35,23 @@ class CrossConfEnv {
    *
    * @return {Array.<String>} Augments.
    */
-  static replaceArgv( argv, keys ) {
-    if( keys.length === 0 ) { return argv; }
+  static replaceArgv (argv, keys) {
+    if (keys.length === 0) {
+      return argv
+    }
 
-    return argv.map( ( arg ) => {
-      let newArg = arg;
-      keys.forEach( ( key ) => {
-        const pettern = '%' + key + '%|\\$' + key + '|' + key;
-        const regexp  = new RegExp( pettern );
-        if( regexp.test( newArg ) ) {
-          newArg = newArg.replace( regexp, String( process.env[ key ] ) );
+    return argv.map((arg) => {
+      let newArg = arg
+      keys.forEach((key) => {
+        const pettern = '%' + key + '%|\\$' + key + '|' + key
+        const regexp  = new RegExp(pettern)
+        if (regexp.test(newArg)) {
+          newArg = newArg.replace(regexp, String(process.env[key]))
         }
-      } );
+      })
 
-      return newArg;
-    } );
+      return newArg
+    })
   }
 
   /**
@@ -63,17 +62,18 @@ class CrossConfEnv {
    *
    * @return {Object} Process.
    */
-  static execute( argv ) {
-    const newArgv = CrossConfEnv.replaceArgv( argv, CrossConfEnv.filterKeys() );
-    if( !( newArgv && 0 < newArgv.length ) ) { return process.exit(); }
+  static execute (argv) {
+    const newArgv = CrossConfEnv.replaceArgv(argv, CrossConfEnv.filterKeys())
+    if (!(newArgv && 0 < newArgv.length)) {
+      return process.exit()
+    }
 
-    const command = newArgv.shift();
-    const proc    = Spawn( command, newArgv, { stdio: 'inherit' } );
+    const command = newArgv.shift()
+    const proc    = Spawn(command, newArgv, { stdio: 'inherit' })
+    proc.on('exit', process.exit)
 
-    proc.on( 'exit', process.exit );
-
-    return proc;
+    return proc
   }
 }
 
-module.exports = CrossConfEnv;
+module.exports = CrossConfEnv

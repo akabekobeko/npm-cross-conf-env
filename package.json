@@ -8,8 +8,8 @@
   "engines": {
     "node": ">= 4"
   },
-  "main": "index.js",
-  "bin": "src/bin/main.js",
+  "main": "src/lib/index.js",
+  "bin": "src/bin/index.js",
   "files": [
     "src/bin",
     "src/lib",
@@ -52,17 +52,22 @@
   },
   "scripts": {
     "test": "mocha --timeout 50000 --compilers js:babel-register test/**/*.test.js",
-    "esdoc": "esdoc"
+    "esdoc": "esdoc",
+    "eslint": "eslint ./src"
+  },
+  "dependencies": {
+    "cross-spawn": "^5.1.0"
   },
   "devDependencies": {
     "babel-preset-power-assert": "^1.0.0",
-    "babel-register": "^6.22.0",
+    "babel-register": "^6.23.0",
     "esdoc": "^0.5.2",
     "esdoc-node": "^1.0.0",
+    "eslint": "^3.16.1",
+    "eslint-config-standard": "^6.2.1",
+    "eslint-plugin-promise": "^3.4.2",
+    "eslint-plugin-standard": "^2.0.1",
     "mocha": "^3.2.0",
     "power-assert": "^1.4.2"
-  },
-  "dependencies": {
-    "cross-spawn": "^5.0.1"
   }
 }
