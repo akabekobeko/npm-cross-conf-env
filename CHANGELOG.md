@@ -1,60 +1,85 @@
 # ChangeLog
 
-# 1.1.2
+## v1.2.0
 
-* Change
-  * Node v4 support [#23](https://github.com/akabekobeko/npm-cross-conf-env/issues/23)
+### Breaking Changes
 
-## 1.1.1
+- Support Node.js v12 or later [#27](https://github.com/akabekobeko/npm-cross-conf-env/issues/27)
 
-* Fix
-  * Package.json's file properties specification is incorrect [#21](https://github.com/akabekobeko/npm-cross-conf-env/issues/21)
+### Changes
 
-## 1.1.0
+- Modernize project [#28](https://github.com/akabekobeko/npm-cross-conf-env/issues/28)
 
-* Change
-  * Drop transpile by Babel [#20](https://github.com/akabekobeko/npm-cross-conf-env/issues/20)
+## v1.1.2
 
-## 1.0.7
+### Changes
 
-* Change
-  * [Using a Config in a Redirect on Mac &amp; Windows](https://github.com/akabekobeko/npm-cross-conf-env/issues/17)
-  * [Node v7 support](https://github.com/akabekobeko/npm-cross-conf-env/issues/16)
+- Node v4 support [#23](https://github.com/akabekobeko/npm-cross-conf-env/issues/23)
 
-## 1.0.6
+## v1.1.1
 
-* Change
-  * [Support npm config params](https://github.com/akabekobeko/npm-cross-conf-env/issues/14)
-* Fix
-  * [It is an error to `npm run` the examples](https://github.com/akabekobeko/npm-cross-conf-env/issues/12)
+### Fixes
 
-## 1.0.5
+- Package.json's file properties specification is incorrect [#21](https://github.com/akabekobeko/npm-cross-conf-env/issues/21)
 
-* Fix
-  * [Can't correctly identify the prefix](https://github.com/akabekobeko/npm-cross-conf-env/issues/10)
+## v1.1.0
 
-## 1.0.4
+### Changes
 
-* Change
-  * [Supporting replacement of parameters including multiple variables](https://github.com/akabekobeko/npm-cross-conf-env/issues/9)
+- Drop transpile by Babel [#20](https://github.com/akabekobeko/npm-cross-conf-env/issues/20)
 
-## 1.0.3
+## v1.0.7
 
-* Fix
-  * ["config" in the description of package.json is in the "conf"](https://github.com/akabekobeko/npm-cross-conf-env/issues/6)
-  * [Change the cross-conf-env of samples from the dependencies in devDependencies](https://github.com/akabekobeko/npm-cross-conf-env/issues/7)
-  * [Files remain from a xlsx-extractor to examples](https://github.com/akabekobeko/npm-cross-conf-env/issues/8)
+### Features
 
-## 1.0.2
+- Using a Config in a Redirect on Mac & Windows [#17](https://github.com/akabekobeko/npm-cross-conf-env/issues/17)
 
-* Fix
-  * ["config" is "conf" in package.json sample of README](https://github.com/akabekobeko/npm-cross-conf-env/issues/5)
+### Changes
+
+- Node v7 support [#16](https://github.com/akabekobeko/npm-cross-conf-env/issues/16)
+
+## v1.0.6
+
+### Features
+
+- Support npm config params [#14](https://github.com/akabekobeko/npm-cross-conf-env/issues/14)
+
+### Fixes
+
+- It is an error to `npm run` the examples [#12](https://github.com/akabekobeko/npm-cross-conf-env/issues/12)
+
+## v1.0.5
+
+### Fixes
+
+- Can't correctly identify the prefix [#10](https://github.com/akabekobeko/npm-cross-conf-env/issues/10)
+
+## v1.0.4
+
+### Features
+
+- Supporting replacement of parameters including multiple variables [#9](https://github.com/akabekobeko/npm-cross-conf-env/issues/9)
+
+## v1.0.3
+
+### Fixes
+
+- "config" in the description of package.json is in the "conf" [#6](https://github.com/akabekobeko/npm-cross-conf-env/issues/6)
+- Change the cross-conf-env of samples from the dependencies in devDependencies [#7](https://github.com/akabekobeko/npm-cross-conf-env/issues/7)
+- Files remain from a xlsx-extractor to examples [#8](https://github.com/akabekobeko/npm-cross-conf-env/issues/8)
+
+## v1.0.2
+
+### Fixes
+
+- "config" is "conf" in package.json sample of README [#5](https://github.com/akabekobeko/npm-cross-conf-env/issues/5)
 
 ## 1.0.1
 
-* Fix
-  * [npm_package_config_ is in npm_package_conf in the replacement process](https://github.com/akabekobeko/npm-cross-conf-env/issues/4)
+### Fixes
 
-## 1.0.0
+- `npm_package_config_` is in `npm_package_conf` in the replacement process [#4](https://github.com/akabekobeko/npm-cross-conf-env/issues/4)
 
-* First release
+## v1.0.0
+
+- First release

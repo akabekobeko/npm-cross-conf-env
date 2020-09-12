@@ -1,19 +1,17 @@
 {
   "name": "cross-conf-env",
   "description": "To cross-platform the config and root variable reference of package.json in npm-scripts.",
-  "version": "1.1.2",
+  "version": "1.2.0",
   "author": "akabeko",
   "license": "MIT",
   "homepage": "https://github.com/akabekobeko/npm-cross-conf-env#readme",
   "engines": {
-    "node": ">= 4"
+    "node": ">= 12"
   },
-  "main": "src/lib/index.js",
-  "bin": "src/bin/index.js",
+  "main": "dist/lib/index.js",
+  "bin": "dist/bin/index.js",
   "files": [
-    "src/bin",
-    "src/lib",
-    "index.js"
+    "dist"
   ],
   "keywords": [
     "npm-scripts",
@@ -28,46 +26,22 @@
   "bugs": {
     "url": "https://github.com/akabekobeko/npm-cross-conf-env/issues"
   },
-  "esdoc": {
-    "source": "./src",
-    "destination": "./esdoc",
-    "test": {
-      "type": "mocha",
-      "source": "./test"
-    },
-    "plugins": [
-      {
-        "name": "esdoc-node"
-      }
-    ]
-  },
-  "babel": {
-    "env": {
-      "development": {
-        "presets": [
-          "power-assert"
-        ]
-      }
-    }
-  },
   "scripts": {
-    "test": "mocha --timeout 50000 --compilers js:babel-register test/**/*.test.js",
-    "esdoc": "esdoc",
-    "eslint": "eslint ./src"
+    "test": "jest",
+    "start": "npm run watch",
+    "tsc": "tsc --noEmit",
+    "build": "tsc",
+    "watch": "tsc -w",
+    "prepare": "npm run build"
   },
   "dependencies": {
-    "cross-spawn": "^5.1.0"
+    "cross-spawn": "^7.0.3"
   },
   "devDependencies": {
-    "babel-preset-power-assert": "^1.0.0",
-    "babel-register": "^6.23.0",
-    "esdoc": "^0.5.2",
-    "esdoc-node": "^1.0.0",
-    "eslint": "^3.16.1",
-    "eslint-config-standard": "^6.2.1",
-    "eslint-plugin-promise": "^3.4.2",
-    "eslint-plugin-standard": "^2.0.1",
-    "mocha": "^3.2.0",
-    "power-assert": "^1.4.2"
+    "@types/jest": "^26.0.13",
+    "@types/node": "^14.10.0",
+    "jest": "^26.4.2",
+    "ts-jest": "^26.3.0",
+    "typescript": "^4.0.2"
   }
 }
