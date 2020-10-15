@@ -150,6 +150,42 @@ describe('cross-conf-env', () => {
       assert.deepStrictEqual(actual, expected)
     })
 
+    it('two variables', () => {
+      const keys = filterKeys()
+      const actual = replaceArgv(
+        ['npm_package_version:npm_package_version'],
+        keys
+      )
+      const expected = [
+        `${process.env.npm_package_version}:${process.env.npm_package_version}`
+      ]
+      assert.deepStrictEqual(actual, expected)
+    })
+
+    it('two $variables', () => {
+      const keys = filterKeys()
+      const actual = replaceArgv(
+        ['$npm_package_version:$npm_package_version'],
+        keys
+      )
+      const expected = [
+        `${process.env.npm_package_version}:${process.env.npm_package_version}`
+      ]
+      assert.deepStrictEqual(actual, expected)
+    })
+
+    it('two %variables%', () => {
+      const keys = filterKeys()
+      const actual = replaceArgv(
+        ['%npm_package_version%:%npm_package_version%'],
+        keys
+      )
+      const expected = [
+        `${process.env.npm_package_version}:${process.env.npm_package_version}`
+      ]
+      assert.deepStrictEqual(actual, expected)
+    })
+
     it('Overlapping prefix: var', () => {
       const keys = filterKeys()
       const actual = replaceArgv(
