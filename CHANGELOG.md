@@ -1,5 +1,12 @@
 # ChangeLog
 
+## v1.2.1
+
+### Fixes
+
+- Using ':' between two variables not working on Windows 10 [#25](https://github.com/akabekobeko/npm-cross-conf-env/issues/25)
+  - Fix to be able to use the same variable more than once by proudust [#30](https://github.com/akabekobeko/npm-cross-conf-env/pull/30) by [proudust (Proudust)](https://github.com/proudust)
+
 ## v1.2.0
 
 ### Breaking Changes
