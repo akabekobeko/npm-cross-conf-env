@@ -38,7 +38,7 @@ export const replaceArgv = (argv: string[], keys: string[]) => {
     let newArg = arg
     keys.forEach((key) => {
       const pettern = '%' + key + '%|\\$' + key + '|' + key
-      const regexp = new RegExp(pettern)
+      const regexp = new RegExp(pettern, 'g')
       if (regexp.test(newArg)) {
         newArg = newArg.replace(regexp, String(process.env[key]))
       }
