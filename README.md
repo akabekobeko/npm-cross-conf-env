@@ -2,7 +2,7 @@
 
 [![Support Node of LTS](https://img.shields.io/badge/node-LTS-brightgreen.svg)](https://nodejs.org/)
 [![npm version](https://badge.fury.io/js/cross-conf-env.svg)](https://badge.fury.io/js/cross-conf-env)
-![test](https://github.com/akabekobeko/npm-cross-conf-en/workflows/test/badge.svg)
+[![test](https://github.com/akabekobeko/npm-cross-conf-env/actions/workflows/test.yml/badge.svg)](https://github.com/akabekobeko/npm-cross-conf-env/actions/workflows/test.yml)
 [![license: MIT](https://img.shields.io/badge/license-MIT-blue)](https://github.com/akabekobeko/npm-cross-conf-env/blob/master/LICENSE)
 
 To cross-platform the `config` and `root` variable reference of package.json in npm-scripts.
