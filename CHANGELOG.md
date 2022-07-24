@@ -1,5 +1,11 @@
 # ChangeLog
 
+## v1.3.0
+
+### Breaking Changes
+
+- Support Node.js v14 or later [#36](https://github.com/akabekobeko/npm-cross-conf-env/issues/36)
+
 ## v1.2.1
 
 ### Fixes
