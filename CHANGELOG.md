@@ -1,5 +1,15 @@
 # ChangeLog
 
+## v2.0.0
+
+### Breaking Changes
+
+- Support Node.js v18 or later
+
+### Changes
+
+- chore: update deps and remove unnecessary packages [#40](https://github.com/akabekobeko/npm-cross-conf-env/pull/40)
+
 ## v1.3.0
 
 ### Breaking Changes

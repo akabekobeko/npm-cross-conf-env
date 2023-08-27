@@ -1,11 +1,11 @@
 {
   "name": "cross-conf-env",
   "description": "To cross-platform the config and root variable reference of package.json in npm-scripts.",
-  "version": "1.3.0",
+  "version": "2.0.0",
   "author": "akabeko",
   "license": "MIT",
   "engines": {
-    "node": ">= 14"
+    "node": ">= 18"
   },
   "main": "dist/lib/index.js",
   "bin": "dist/bin/index.js",
