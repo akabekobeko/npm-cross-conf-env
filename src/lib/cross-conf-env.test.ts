@@ -1,306 +1,290 @@
-import assert from 'assert'
+import { beforeEach, expect, test } from 'vitest'
 import { filterKeys, replaceArgv } from './cross-conf-env'
 
-describe('cross-conf-env', () => {
-  const ENV_APP_NAME = 'MyApp'
-  const ENV_APP_MODE = 'test'
-  const ENV_APP_LANG = 'en-us'
+const ENV_APP_NAME = 'MyApp'
+const ENV_APP_MODE = 'test'
+const ENV_APP_LANG = 'en-us'
 
-  beforeEach(() => {
-    process.env['npm_package_config_app'] = ENV_APP_NAME
-    process.env['npm_package_config_appMode'] = ENV_APP_MODE
-    process.env['npm_package_config_app_mode'] = ENV_APP_MODE
-    process.env['npm_package_config_lang'] = ENV_APP_LANG
-    process.env['npm_config_app'] = ENV_APP_NAME
-    process.env['npm_config_lang'] = ENV_APP_LANG
-  })
+beforeEach(() => {
+  process.env['npm_package_config_app'] = ENV_APP_NAME
+  process.env['npm_package_config_appMode'] = ENV_APP_MODE
+  process.env['npm_package_config_app_mode'] = ENV_APP_MODE
+  process.env['npm_package_config_lang'] = ENV_APP_LANG
+  process.env['npm_config_app'] = ENV_APP_NAME
+  process.env['npm_config_lang'] = ENV_APP_LANG
+})
 
-  describe('filterKeys', () => {
-    it('npm_package_config_app', () => {
-      const keys = filterKeys()
-      const actual = keys.some((key) => key === 'npm_package_config_app')
-      assert.strictEqual(actual, true)
-    })
+test('npm_package_config_app', () => {
+  const keys = filterKeys()
+  const actual = keys.some((key) => key === 'npm_package_config_app')
+  expect(actual).toBe(true)
+})
 
-    it('npm_package_version', () => {
-      const keys = filterKeys()
-      const actual = keys.some((key) => key === 'npm_package_version')
-      assert.strictEqual(actual, true)
-    })
-  })
+test('npm_package_version', () => {
+  const keys = filterKeys()
+  const actual = keys.some((key) => key === 'npm_package_version')
+  expect(actual).toBe(true)
+})
 
-  describe('replaceArgv', () => {
-    it('npm_package_config_app, npm_package_version', () => {
-      const keys = filterKeys()
-      const actual = replaceArgv(
-        ['test', 'npm_package_config_app', 'npm_package_version'],
-        keys
-      )
-      const expected = ['test', ENV_APP_NAME, process.env.npm_package_version]
+test('npm_package_config_app, npm_package_version', () => {
+  const keys = filterKeys()
+  const actual = replaceArgv(
+    ['test', 'npm_package_config_app', 'npm_package_version'],
+    keys
+  )
+  const expected = ['test', ENV_APP_NAME, process.env.npm_package_version]
+  expect(actual).toEqual(expected)
+})
 
-      assert.deepStrictEqual(actual, expected)
-    })
+test('$npm_package_config_app, $npm_package_version', () => {
+  const keys = filterKeys()
+  const actual = replaceArgv(
+    ['test', '$npm_package_config_app', '$npm_package_version'],
+    keys
+  )
+  const expected = ['test', ENV_APP_NAME, process.env.npm_package_version]
+  expect(actual).toEqual(expected)
+})
 
-    it('$npm_package_config_app, $npm_package_version', () => {
-      const keys = filterKeys()
-      const actual = replaceArgv(
-        ['test', '$npm_package_config_app', '$npm_package_version'],
-        keys
-      )
-      const expected = ['test', ENV_APP_NAME, process.env.npm_package_version]
+test('%npm_package_config_app%, %npm_package_version%', () => {
+  const keys = filterKeys()
+  const actual = replaceArgv(
+    ['test', '%npm_package_config_app%', '%npm_package_version%'],
+    keys
+  )
+  const expected = ['test', ENV_APP_NAME, process.env.npm_package_version]
+  expect(actual).toEqual(expected)
+})
 
-      assert.deepStrictEqual(actual, expected)
-    })
+test('param=var,other', () => {
+  const keys = filterKeys()
+  const actual = replaceArgv(
+    [
+      'test',
+      'param=npm_package_config_app,other',
+      'param=npm_package_version,other',
+    ],
+    keys
+  )
+  const expected = [
+    'test',
+    'param=' + ENV_APP_NAME + ',other',
+    'param=' + process.env.npm_package_version + ',other',
+  ]
 
-    it('%npm_package_config_app%, %npm_package_version%', () => {
-      const keys = filterKeys()
-      const actual = replaceArgv(
-        ['test', '%npm_package_config_app%', '%npm_package_version%'],
-        keys
-      )
-      const expected = ['test', ENV_APP_NAME, process.env.npm_package_version]
+  expect(actual).toEqual(expected)
+})
 
-      assert.deepStrictEqual(actual, expected)
-    })
+test('param=$var,other', () => {
+  const keys = filterKeys()
+  const actual = replaceArgv(
+    [
+      'test',
+      'param=$npm_package_config_app,other',
+      'param=$npm_package_version,other',
+    ],
+    keys
+  )
+  const expected = [
+    'test',
+    'param=' + ENV_APP_NAME + ',other',
+    'param=' + process.env.npm_package_version + ',other',
+  ]
 
-    it('param=var,other', () => {
-      const keys = filterKeys()
-      const actual = replaceArgv(
-        [
-          'test',
-          'param=npm_package_config_app,other',
-          'param=npm_package_version,other'
-        ],
-        keys
-      )
-      const expected = [
-        'test',
-        'param=' + ENV_APP_NAME + ',other',
-        'param=' + process.env.npm_package_version + ',other'
-      ]
+  expect(actual).toEqual(expected)
+})
 
-      assert.deepStrictEqual(actual, expected)
-    })
+test('param=%var%,other', () => {
+  const keys = filterKeys()
+  const actual = replaceArgv(
+    [
+      'test',
+      'param=%npm_package_config_app%,other',
+      'param=%npm_package_version%,other',
+    ],
+    keys
+  )
+  const expected = [
+    'test',
+    'param=' + ENV_APP_NAME + ',other',
+    'param=' + process.env.npm_package_version + ',other',
+  ]
 
-    it('param=$var,other', () => {
-      const keys = filterKeys()
-      const actual = replaceArgv(
-        [
-          'test',
-          'param=$npm_package_config_app,other',
-          'param=$npm_package_version,other'
-        ],
-        keys
-      )
-      const expected = [
-        'test',
-        'param=' + ENV_APP_NAME + ',other',
-        'param=' + process.env.npm_package_version + ',other'
-      ]
+  expect(actual).toEqual(expected)
+})
 
-      assert.deepStrictEqual(actual, expected)
-    })
+test('var:var', () => {
+  const keys = filterKeys()
+  const actual = replaceArgv(
+    ['npm_package_config_app:npm_package_version'],
+    keys
+  )
+  const expected = [`${ENV_APP_NAME}:${process.env.npm_package_version}`]
 
-    it('param=%var%,other', () => {
-      const keys = filterKeys()
-      const actual = replaceArgv(
-        [
-          'test',
-          'param=%npm_package_config_app%,other',
-          'param=%npm_package_version%,other'
-        ],
-        keys
-      )
-      const expected = [
-        'test',
-        'param=' + ENV_APP_NAME + ',other',
-        'param=' + process.env.npm_package_version + ',other'
-      ]
+  expect(actual).toEqual(expected)
+})
 
-      assert.deepStrictEqual(actual, expected)
-    })
+test('$var:$var', () => {
+  const keys = filterKeys()
+  const actual = replaceArgv(
+    ['$npm_package_config_app:$npm_package_version'],
+    keys
+  )
+  const expected = [`${ENV_APP_NAME}:${process.env.npm_package_version}`]
 
-    it('var:var', () => {
-      const keys = filterKeys()
-      const actual = replaceArgv(
-        ['npm_package_config_app:npm_package_version'],
-        keys
-      )
-      const expected = [`${ENV_APP_NAME}:${process.env.npm_package_version}`]
-      assert.deepStrictEqual(actual, expected)
-    })
+  expect(actual).toEqual(expected)
+})
 
-    it('$var:$var', () => {
-      const keys = filterKeys()
-      const actual = replaceArgv(
-        ['$npm_package_config_app:$npm_package_version'],
-        keys
-      )
-      const expected = [`${ENV_APP_NAME}:${process.env.npm_package_version}`]
-      assert.deepStrictEqual(actual, expected)
-    })
+test('%var%:%var%', () => {
+  const keys = filterKeys()
+  const actual = replaceArgv(
+    ['%npm_package_config_app%:%npm_package_version%'],
+    keys
+  )
+  const expected = [`${ENV_APP_NAME}:${process.env.npm_package_version}`]
 
-    it('%var%:%var%', () => {
-      const keys = filterKeys()
-      const actual = replaceArgv(
-        ['%npm_package_config_app%:%npm_package_version%'],
-        keys
-      )
-      const expected = [`${ENV_APP_NAME}:${process.env.npm_package_version}`]
-      assert.deepStrictEqual(actual, expected)
-    })
+  expect(actual).toEqual(expected)
+})
 
-    it('two variables', () => {
-      const keys = filterKeys()
-      const actual = replaceArgv(
-        ['npm_package_version:npm_package_version'],
-        keys
-      )
-      const expected = [
-        `${process.env.npm_package_version}:${process.env.npm_package_version}`
-      ]
-      assert.deepStrictEqual(actual, expected)
-    })
+test('two variables', () => {
+  const keys = filterKeys()
+  const actual = replaceArgv(['npm_package_version:npm_package_version'], keys)
+  const expected = [
+    `${process.env.npm_package_version}:${process.env.npm_package_version}`,
+  ]
+  expect(actual).toEqual(expected)
+})
 
-    it('two $variables', () => {
-      const keys = filterKeys()
-      const actual = replaceArgv(
-        ['$npm_package_version:$npm_package_version'],
-        keys
-      )
-      const expected = [
-        `${process.env.npm_package_version}:${process.env.npm_package_version}`
-      ]
-      assert.deepStrictEqual(actual, expected)
-    })
+test('two $variables', () => {
+  const keys = filterKeys()
+  const actual = replaceArgv(
+    ['$npm_package_version:$npm_package_version'],
+    keys
+  )
+  const expected = [
+    `${process.env.npm_package_version}:${process.env.npm_package_version}`,
+  ]
 
-    it('two %variables%', () => {
-      const keys = filterKeys()
-      const actual = replaceArgv(
-        ['%npm_package_version%:%npm_package_version%'],
-        keys
-      )
-      const expected = [
-        `${process.env.npm_package_version}:${process.env.npm_package_version}`
-      ]
-      assert.deepStrictEqual(actual, expected)
-    })
+  expect(actual).toEqual(expected)
+})
 
-    it('Overlapping prefix: var', () => {
-      const keys = filterKeys()
-      const actual = replaceArgv(
-        [
-          'npm_package_config_app',
-          'npm_package_config_app_mode',
-          'npm_package_config_appMode'
-        ],
-        keys
-      )
-      const expected = [ENV_APP_NAME, ENV_APP_MODE, ENV_APP_MODE]
+test('two %variables%', () => {
+  const keys = filterKeys()
+  const actual = replaceArgv(
+    ['%npm_package_version%:%npm_package_version%'],
+    keys
+  )
+  const expected = [
+    `${process.env.npm_package_version}:${process.env.npm_package_version}`,
+  ]
+  expect(actual).toEqual(expected)
+})
 
-      assert.deepStrictEqual(actual, expected)
-    })
+test('Overlapping prefix: var', () => {
+  const keys = filterKeys()
+  const actual = replaceArgv(
+    [
+      'npm_package_config_app',
+      'npm_package_config_app_mode',
+      'npm_package_config_appMode',
+    ],
+    keys
+  )
+  const expected = [ENV_APP_NAME, ENV_APP_MODE, ENV_APP_MODE]
 
-    it('Overlapping prefix: $var', () => {
-      const keys = filterKeys()
-      const actual = replaceArgv(
-        [
-          '$npm_package_config_app',
-          '$npm_package_config_app_mode',
-          '$npm_package_config_appMode'
-        ],
-        keys
-      )
-      const expected = [ENV_APP_NAME, ENV_APP_MODE, ENV_APP_MODE]
+  expect(actual).toEqual(expected)
+})
 
-      assert.deepStrictEqual(actual, expected)
-    })
+test('Overlapping prefix: $var', () => {
+  const keys = filterKeys()
+  const actual = replaceArgv(
+    [
+      '$npm_package_config_app',
+      '$npm_package_config_app_mode',
+      '$npm_package_config_appMode',
+    ],
+    keys
+  )
+  const expected = [ENV_APP_NAME, ENV_APP_MODE, ENV_APP_MODE]
 
-    it('Overlapping prefix: %var%', () => {
-      const keys = filterKeys()
-      const actual = replaceArgv(
-        [
-          '%npm_package_config_app%',
-          '%npm_package_config_app_mode%',
-          '%npm_package_config_appMode%'
-        ],
-        keys
-      )
-      const expected = [ENV_APP_NAME, ENV_APP_MODE, ENV_APP_MODE]
+  expect(actual).toEqual(expected)
+})
 
-      assert.deepStrictEqual(actual, expected)
-    })
+test('Overlapping prefix: %var%', () => {
+  const keys = filterKeys()
+  const actual = replaceArgv(
+    [
+      '%npm_package_config_app%',
+      '%npm_package_config_app_mode%',
+      '%npm_package_config_appMode%',
+    ],
+    keys
+  )
+  const expected = [ENV_APP_NAME, ENV_APP_MODE, ENV_APP_MODE]
 
-    it('Maltiple variables in an one paramter: "var1-var2", "$var1-$var2", "%var1%-%var2%"', () => {
-      const keys = filterKeys()
-      const actual = replaceArgv(
-        [
-          'npm_package_config_app-npm_package_version',
-          '$npm_package_config_app-$npm_package_version',
-          '%npm_package_config_app%-%npm_package_version%'
-        ],
-        keys
-      )
-      const expected = ENV_APP_NAME + '-' + process.env.npm_package_version
+  expect(actual).toEqual(expected)
+})
 
-      assert.deepStrictEqual(actual, [expected, expected, expected])
-    })
+test('Maltiple variables in an one paramter: "var1-var2", "$var1-$var2", "%var1%-%var2%"', () => {
+  const keys = filterKeys()
+  const actual = replaceArgv(
+    [
+      'npm_package_config_app-npm_package_version',
+      '$npm_package_config_app-$npm_package_version',
+      '%npm_package_config_app%-%npm_package_version%',
+    ],
+    keys
+  )
+  const expected = ENV_APP_NAME + '-' + process.env.npm_package_version
 
-    it('npm_config: var', () => {
-      const keys = filterKeys()
-      const actual = replaceArgv(
-        [
-          'test',
-          'param=npm_config_app,other',
-          'param=npm_package_version,other'
-        ],
-        keys
-      )
-      const expected = [
-        'test',
-        'param=' + ENV_APP_NAME + ',other',
-        'param=' + process.env.npm_package_version + ',other'
-      ]
+  expect(actual).toEqual([expected, expected, expected])
+})
 
-      assert.deepStrictEqual(actual, expected)
-    })
+test('npm_config: var', () => {
+  const keys = filterKeys()
+  const actual = replaceArgv(
+    ['test', 'param=npm_config_app,other', 'param=npm_package_version,other'],
+    keys
+  )
+  const expected = [
+    'test',
+    'param=' + ENV_APP_NAME + ',other',
+    'param=' + process.env.npm_package_version + ',other',
+  ]
 
-    it('npm_config: $var', () => {
-      const keys = filterKeys()
-      const actual = replaceArgv(
-        [
-          'test',
-          'param=$npm_config_app,other',
-          'param=$npm_package_version,other'
-        ],
-        keys
-      )
-      const expected = [
-        'test',
-        'param=' + ENV_APP_NAME + ',other',
-        'param=' + process.env.npm_package_version + ',other'
-      ]
+  expect(actual).toEqual(expected)
+})
 
-      assert.deepStrictEqual(actual, expected)
-    })
+test('npm_config: $var', () => {
+  const keys = filterKeys()
+  const actual = replaceArgv(
+    ['test', 'param=$npm_config_app,other', 'param=$npm_package_version,other'],
+    keys
+  )
+  const expected = [
+    'test',
+    'param=' + ENV_APP_NAME + ',other',
+    'param=' + process.env.npm_package_version + ',other',
+  ]
 
-    it('npm_config: %var%', () => {
-      const keys = filterKeys()
-      const actual = replaceArgv(
-        [
-          'test',
-          'param=%npm_config_app%,other',
-          'param=%npm_package_version%,other'
-        ],
-        keys
-      )
-      const expected = [
-        'test',
-        'param=' + ENV_APP_NAME + ',other',
-        'param=' + process.env.npm_package_version + ',other'
-      ]
+  expect(actual).toEqual(expected)
+})
 
-      assert.deepStrictEqual(actual, expected)
-    })
-  })
+test('npm_config: %var%', () => {
+  const keys = filterKeys()
+  const actual = replaceArgv(
+    [
+      'test',
+      'param=%npm_config_app%,other',
+      'param=%npm_package_version%,other',
+    ],
+    keys
+  )
+  const expected = [
+    'test',
+    'param=' + ENV_APP_NAME + ',other',
+    'param=' + process.env.npm_package_version + ',other',
+  ]
+
+  expect(actual).toEqual(expected)
 })
